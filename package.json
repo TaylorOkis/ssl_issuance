@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "description": "A software that streamlines the process of acquiring let's encrypt ssl certificate",
+  "type": "module",
   "dependencies": {
     "@prisma/client": "^6.3.1",
     "bcryptjs": "^3.0.1",
