@@ -12,12 +12,12 @@ model User {
   name              String
   email             String    @unique
   password          String
-  resetToken        String
-  resetTokenExpiry  String
-  accountKey        String
-  accountUrl        String
-  createdAt          DateTime  @default(now())
-  updatedAt         DateTime   @updatedAt
+  resetToken        String?
+  resetTokenExpiry  String?
+  accountKey        String?
+  accountUrl        String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
   domain            Domain[]
 }
@@ -57,17 +57,17 @@ model SubDomain {
 
 
 model Certificate {
-  id          String     @id  @default(uuid())
-  sslCert     String?
-  csrCert     String?
-  privateKey  String?
-  validFrom   DateTime?
-  validTo     DateTime?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  domainId    String?    @unique
+  id           String     @id  @default(uuid())
+  sslCert      String?
+  csrCert      String?
+  privateKey   String?
+  validFrom    DateTime?
+  validTo      DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  domainId     String?    @unique
 
-  domain      Domain?     @relation(fields: [domainId], references: [id])
+  domain       Domain?    @relation(fields: [domainId], references: [id])
 
-  subDomainId   SubDomain[]
+  subDomainId  SubDomain[]
 }

@@ -2,6 +2,7 @@ import express from "express";
 import "express-async-errors";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import morganMiddleware from "./middlewares/morganMiddleware";
 import authRouter from "./routes/auth-router";
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morganMiddleware);
 
 app.get("/", (req, res) => {

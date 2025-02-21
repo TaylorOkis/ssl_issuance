@@ -1,4 +1,3 @@
-import { StatusCodes } from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
 import { NotFoundError } from "@/utils/errors";
 
