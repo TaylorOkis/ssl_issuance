@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import morganMiddleware from "./middlewares/morganMiddleware";
-import authRouter from "./routes/auth";
+import authRouter from "./routes/auth-router";
+import notFound from "./middlewares/not-found";
+import errorHandler from "./middlewares/error-handler";
 
 dotenv.config();
 const app = express();
@@ -19,6 +21,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+
+// Error middleware
+app.use(notFound);
+app.use(errorHandler);
 
 function start() {
   try {
