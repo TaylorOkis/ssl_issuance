@@ -1,8 +1,9 @@
+import bcrypt from "bcryptjs";
+import { Request, Response } from "express";
+
 import db from "@/database/db";
 import { StatusCodes } from "http-status-codes";
-import { Request, Response } from "express";
 import { BadRequestError, UnauthenticatedError } from "@/utils/errors";
-import bcrypt from "bcryptjs";
 import { attachCookieToResponse } from "@/utils/auth/jwt";
 
 const register = async (req: Request, res: Response) => {

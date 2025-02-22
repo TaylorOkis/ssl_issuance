@@ -1,6 +1,6 @@
 import { verifyToken } from "@/utils/auth/jwt";
-import { UnauthorizedError, UnauthenticatedError } from "@/utils/errors";
-import { Request, Response, NextFunction } from "express";
+import { UnauthenticatedError } from "@/utils/errors";
+import { Response, NextFunction } from "express";
 import { Payload, CustomRequest } from "@/types/types";
 
 const authenticateUser = async (

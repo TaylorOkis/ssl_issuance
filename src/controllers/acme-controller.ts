@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-// import { createPrivateKey } from "crypto";
 import acme from "acme-client";
+import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
+
 import db from "@/database/db";
 import { CustomRequest } from "@/types/types";
 import { BadRequestError, NotFoundError } from "@/utils/errors";
