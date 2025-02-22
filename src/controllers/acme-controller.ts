@@ -9,7 +9,7 @@ import { BadRequestError, NotFoundError } from "@/utils/errors";
 const DIRECTORY_URL = acme.directory.letsencrypt.staging;
 
 const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
-  const { email } = req.user;
+  const { email } = req.user!;
 
   const existingUser = await db.user.findUnique({
     where: { email },
@@ -52,7 +52,7 @@ const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
 };
 
 const deleteAcmeAccount = async (req: CustomRequest, res: Response) => {
-  const { email } = req.user;
+  const { email } = req.user!;
 
   const existingUser = await db.user.findUnique({
     where: { email },

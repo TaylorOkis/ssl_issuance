@@ -1,13 +1,21 @@
 import jwt from "jsonwebtoken";
 import { Response } from "express";
 import { Payload } from "@/types/types";
+import { UnauthenticatedError } from "../errors";
 
 const generateToken = ({ payload }: { payload: Payload }) => {
   if (!process.env.JWT_SECRET) {
-    throw new Error("Missing JWT_SECRET in environment variables");
+    throw new UnauthenticatedError(
+      "Missing JWT variable in environment variables"
+    );
   }
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_LIFETIME,
+  if (!process.env.JWT_LIFETIME) {
+    throw new UnauthenticatedError(
+      "Missing JWT variable in environment variables"
+    );
+  }
+  const token = jwt.sign(payload!, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME as any,
   });
   return token;
 };
