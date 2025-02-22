@@ -1,11 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Response } from "express";
-
-interface Payload {
-  id: String;
-  name: String;
-  email: String;
-}
+import { Payload } from "@/types/types";
 
 const generateToken = ({ payload }: { payload: Payload }) => {
   if (!process.env.JWT_SECRET) {

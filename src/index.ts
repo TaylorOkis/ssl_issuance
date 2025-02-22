@@ -8,6 +8,7 @@ import morganMiddleware from "./middlewares/morganMiddleware";
 import authRouter from "./routes/auth-router";
 import notFound from "./middlewares/not-found";
 import errorHandler from "./middlewares/error-handler";
+import acmeRouter from "./routes/acme-router";
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/acme", acmeRouter);
 
 // Error middleware
 app.use(notFound);
