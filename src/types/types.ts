@@ -14,4 +14,14 @@ interface CustomRequest extends Request {
   };
 }
 
-export { Payload, CustomRequest };
+interface CertificateRequest {
+  domain: string;
+  subDomain: Array<string>;
+  email: string;
+  autoGenerateCsr: Boolean;
+  csrCertificate: string;
+  challenge: string;
+  keySize: number;
+}
+
+export { Payload, CustomRequest, CertificateRequest };

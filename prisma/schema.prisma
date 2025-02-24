@@ -71,3 +71,10 @@ model Certificate {
 
   subDomainId  SubDomain[]
 }
+
+model Session {
+  id         String    @id @default(cuid())
+  sid        String    @unique
+  data       String
+  expiresAt  DateTime   
+}

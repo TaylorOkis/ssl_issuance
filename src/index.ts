@@ -4,11 +4,12 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import morganMiddleware from "./middlewares/morganMiddleware";
+import morganMiddleware from "./middlewares/morgan";
 import authRouter from "./routes/auth-router";
 import notFound from "./middlewares/not-found";
 import errorHandler from "./middlewares/error-handler";
 import acmeRouter from "./routes/acme-router";
+import validateRouter from "./routes/validate-router";
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRouter);
 app.use("/acme", acmeRouter);
+app.use("/validate", validateRouter);
 
 // Error middleware
 app.use(notFound);
