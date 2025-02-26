@@ -48,10 +48,10 @@ const validateEmailAndDomain = async (req: CustomRequest, res: Response) => {
     challenge,
     keySize,
   } as any;
-
   req.session.save();
 
   res.status(StatusCodes.SEE_OTHER).redirect("/validate/csr");
+  return;
 };
 
 export default validateEmailAndDomain;

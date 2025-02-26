@@ -10,6 +10,7 @@ import notFound from "./middlewares/not-found";
 import errorHandler from "./middlewares/error-handler";
 import acmeRouter from "./routes/acme-router";
 import validateRouter from "./routes/validate-router";
+import domainRouter from "./routes/domain-router";
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRouter);
 app.use("/acme", acmeRouter);
 app.use("/validate", validateRouter);
+app.use("/domain", domainRouter);
 
 // Error middleware
 app.use(notFound);

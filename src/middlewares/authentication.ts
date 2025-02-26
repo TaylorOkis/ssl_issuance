@@ -1,8 +1,8 @@
 import { verifyToken } from "@/utils/auth/jwt";
 import {
-  BadRequestError,
   NotFoundError,
   UnauthenticatedError,
+  UnauthorizedError,
 } from "@/utils/errors";
 import { Response, NextFunction } from "express";
 import { Payload, CustomRequest } from "@/types/types";
@@ -49,7 +49,7 @@ const checkUserHasAcmeAccount = async (
   }
 
   if (!existingUser.accountKey || !existingUser.accountUrl) {
-    throw new BadRequestError("Acme account is needed to proceed");
+    throw new UnauthorizedError("Acme account is needed to proceed");
   }
 
   next();
