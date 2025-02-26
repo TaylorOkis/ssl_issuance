@@ -63,6 +63,10 @@ const deleteAcmeAccount = async (req: CustomRequest, res: Response) => {
     throw new NotFoundError("User does not Exists");
   }
 
+  if (!existingUser.accountKey || existingUser.accountUrl) {
+    throw new BadRequestError("Acme Account does not exist");
+  }
+
   const client = new acme.Client({
     directoryUrl: DIRECTORY_URL!,
     accountKey: existingUser.accountKey!,

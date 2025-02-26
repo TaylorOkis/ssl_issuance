@@ -1,7 +1,12 @@
 import { verifyToken } from "@/utils/auth/jwt";
-import { UnauthenticatedError } from "@/utils/errors";
+import {
+  BadRequestError,
+  NotFoundError,
+  UnauthenticatedError,
+} from "@/utils/errors";
 import { Response, NextFunction } from "express";
 import { Payload, CustomRequest } from "@/types/types";
+import db from "@/database/db";
 
 const authenticateUser = async (
   req: CustomRequest,
@@ -27,4 +32,27 @@ const authenticateUser = async (
   }
 };
 
-export default authenticateUser;
+const checkUserHasAcmeAccount = async (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id: userId } = req.user!;
+
+  const existingUser = await db.user.findUnique({
+    where: { id: userId },
+    select: { accountKey: true, accountUrl: true },
+  });
+
+  if (!existingUser) {
+    throw new NotFoundError("User does not Exists");
+  }
+
+  if (!existingUser.accountKey || !existingUser.accountUrl) {
+    throw new BadRequestError("Acme account is needed to proceed");
+  }
+
+  next();
+};
+
+export { authenticateUser, checkUserHasAcmeAccount };

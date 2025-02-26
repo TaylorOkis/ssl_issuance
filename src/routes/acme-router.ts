@@ -3,7 +3,7 @@ import {
   creatAcmeAccount,
   deleteAcmeAccount,
 } from "@/controllers/acme-controller";
-import authenticateUser from "@/middlewares/authentication";
+import { authenticateUser } from "@/middlewares/authentication";
 
 const acmeRouter = express.Router();
 
