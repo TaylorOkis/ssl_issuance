@@ -6,8 +6,6 @@ import db from "@/database/db";
 import { CustomRequest } from "@/types/types";
 import { BadRequestError, NotFoundError } from "@/utils/errors";
 
-const DIRECTORY_URL = acme.directory.letsencrypt.staging;
-
 const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
   const { email } = req.user!;
 
@@ -29,7 +27,7 @@ const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
   // TODO: ENCRYPT PRIVATE KEY.
 
   const client = new acme.Client({
-    directoryUrl: DIRECTORY_URL!,
+    directoryUrl: process.env.DIRECTORY_URL!,
     accountKey: privateKey,
   });
 
@@ -68,7 +66,7 @@ const deleteAcmeAccount = async (req: CustomRequest, res: Response) => {
   }
 
   const client = new acme.Client({
-    directoryUrl: DIRECTORY_URL!,
+    directoryUrl: process.env.DIRECTORY_URL!,
     accountKey: existingUser.accountKey!,
     accountUrl: existingUser.accountUrl!,
   });

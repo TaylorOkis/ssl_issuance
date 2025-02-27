@@ -52,12 +52,18 @@ const validateCSR = async (req: CustomRequest, res: Response) => {
         throw new Error("An error occured while generating new csr");
       }
 
-      (req.session as any).newCsrCertificate = {
+      (req.session as any).csrKey = {
         key: newCsrCertificate.key,
-        certificate: newCsrCertificate.certificate,
       } as any;
 
-      req.session.save();
+      (req.session as any).userDataInput = {
+        ...(req.session as any).userDataInput,
+        csrCertificate: newCsrCertificate.certificate,
+      } as any;
+
+      req.session.save((err) => {
+        if (err) throw new Error("An error occurred while saving session data");
+      });
 
       res.status(StatusCodes.SEE_OTHER).redirect("/domain/get-challenge");
       return;

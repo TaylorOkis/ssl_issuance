@@ -1,7 +1,5 @@
 import forge from "node-forge";
 import acme from "acme-client";
-import { Certificate } from "crypto";
-import { CertificateRequest } from "@/types/types";
 
 const validateCsrCertificate = (csrCertificate: string, domain: string) => {
   try {
@@ -35,4 +33,14 @@ const generateCsrCertificate = async (
   };
 };
 
-export { validateCsrCertificate, generateCsrCertificate };
+const formatPemString = async (pemString: string) => {
+  const cleanPem = pemString
+    .replace(/-----BEGIN CERTIFICATE REQUEST-----/g, "")
+    .replace(/-----END CERTIFICATE REQUEST-----/g, "")
+    .replace(/\s+/g, "");
+  const chunks = cleanPem.match(/.{1,64}/g);
+  const formattedPem = chunks?.join("\n");
+  return `-----BEGIN CERTIFICATE REQUEST-----\n${formattedPem}\n-----END CERTIFICATE REQUEST-----`;
+};
+
+export { validateCsrCertificate, generateCsrCertificate, formatPemString };

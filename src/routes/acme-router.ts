@@ -2,7 +2,7 @@ import express from "express";
 import {
   creatAcmeAccount,
   deleteAcmeAccount,
-} from "@/controllers/acme-controller";
+} from "@/controllers/acme-account-controller";
 import { authenticateUser } from "@/middlewares/authentication";
 
 const acmeRouter = express.Router();
