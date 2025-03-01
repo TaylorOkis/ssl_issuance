@@ -1,14 +1,16 @@
-import db from "@/database/db";
 import acme from "acme-client";
+import { Response } from "express";
+
+import db from "@/database/db";
+import DIRECTORY_URL from "@/utils/constants/constants";
+import getSessionData from "@/utils/session/session";
 import { CustomRequest } from "@/types/types";
 import { BadRequestError, NotFoundError } from "@/utils/errors";
-import { Response } from "express";
-import getSessionData from "@/utils/session/session";
-import { setupChallenges } from "@/services/acme-services";
 import { StatusCodes } from "http-status-codes";
-import DIRECTORY_URL from "@/utils/constants/constants";
+import { verifyChallenges } from "@/services/acme-services";
+import executeWithTimeout from "@/utils/timeout/execute-with-timeout";
 
-const getDomainChallenge = async (req: CustomRequest, res: Response) => {
+const verifyDomainChallenge = async (req: CustomRequest, res: Response) => {
   const { id: userId } = req.user!;
   const existingUser = await db.user.findUnique({
     where: { id: userId },
@@ -33,21 +35,20 @@ const getDomainChallenge = async (req: CustomRequest, res: Response) => {
 
   let sessionData;
   try {
-    sessionData = JSON.parse(session.data).userDataInput;
+    sessionData = JSON.parse(session.data).sslData;
   } catch (error) {
     throw new BadRequestError("Session Data is corrupted");
   }
 
-  const challenge = await setupChallenges(
-    req,
-    client,
-    [sessionData.domain, ...sessionData.subDomain],
-    sessionData.challenge
-  );
+  const challenges = sessionData.challenges;
 
-  res
-    .status(StatusCodes.OK)
-    .json({ status: "success", data: { challenges: challenge } });
+  try {
+    await executeWithTimeout(verifyChallenges(client, challenges), 60000);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+
+  res.status(StatusCodes.SEE_OTHER).redirect("/generate/ssl");
 };
 
-export default getDomainChallenge;
+export default verifyDomainChallenge;

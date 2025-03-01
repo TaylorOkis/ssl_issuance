@@ -5,6 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import db from "@/database/db";
 import { CustomRequest } from "@/types/types";
 import { BadRequestError, NotFoundError } from "@/utils/errors";
+import DIRECTORY_URL from "@/utils/constants/constants";
 
 const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
   const { email } = req.user!;
@@ -27,7 +28,7 @@ const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
   // TODO: ENCRYPT PRIVATE KEY.
 
   const client = new acme.Client({
-    directoryUrl: process.env.DIRECTORY_URL!,
+    directoryUrl: DIRECTORY_URL,
     accountKey: privateKey,
   });
 
