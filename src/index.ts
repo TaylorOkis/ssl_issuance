@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+import "./utils/cron_jobs/token-cleanup";
 import morganMiddleware from "./middlewares/morgan";
 import authRouter from "./routes/auth-router";
 import notFound from "./middlewares/not-found";
