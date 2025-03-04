@@ -53,6 +53,8 @@ const generateSSLCertificate = async (req: CustomRequest, res: Response) => {
         )
       : { sslCertificate: sslCertificate.replace(/\n/g, "") };
 
+  // TODO: storeCertificateInDB(csr, privateKey, sslCertificate, domain, subDomain);
+
   req.session.destroy((err) => {
     if (err) {
       throw new Error("An error occured while destroying session data");
