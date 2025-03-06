@@ -48,7 +48,13 @@ const validateEmailAndDomain = async (req: CustomRequest, res: Response) => {
     challenge,
     keySize,
   } as any;
-  req.session.save();
+
+  await new Promise<void>((resolve, reject) => {
+    req.session.save((err) => {
+      if (err) return reject("An error occurred while saving session data");
+      resolve();
+    });
+  });
 
   res.status(StatusCodes.SEE_OTHER).redirect("/validate/csr");
   return;

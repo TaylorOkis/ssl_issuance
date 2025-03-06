@@ -39,13 +39,17 @@ const generateSSLCertificate = async (req: CustomRequest, res: Response) => {
     throw new BadRequestError("Session Data is corrupted");
   }
 
-  const challenges = sessionData.sslData.challenges;
+  const csrCertificate = sessionData.userDataInput.csrCertificate;
   const order = sessionData.sslData.order;
 
-  const sslCertificate = await generateCertificate(client, order, challenges);
+  const sslCertificate = await generateCertificate(
+    client,
+    order,
+    csrCertificate
+  );
 
   const result =
-    sessionData.userDataInput.autoGenerateCsr === true
+    (await sessionData.userDataInput.autoGenerateCsr) === true
       ? getSSLData(
           sessionData.userDataInput.csrCertificate,
           sessionData.csrKey.key,
@@ -55,13 +59,15 @@ const generateSSLCertificate = async (req: CustomRequest, res: Response) => {
 
   // TODO: storeCertificateInDB(csr, privateKey, sslCertificate, domain, subDomain);
 
-  req.session.destroy((err) => {
-    if (err) {
-      throw new Error("An error occured while destroying session data");
-    }
-    res.clearCookie("connect.sid");
-    res.status(StatusCodes.OK).json({ status: "success", data: result });
+  await new Promise<void>((resolve, reject) => {
+    req.session.destroy((err) => {
+      if (err) return reject("An error occured while destroying session data");
+      res.clearCookie("connect.sid");
+      resolve();
+    });
   });
+
+  res.status(StatusCodes.OK).json({ status: "success", data: await result });
 };
 
 export default generateSSLCertificate;

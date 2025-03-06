@@ -1,5 +1,5 @@
 import { CustomRequest } from "@/types/types";
-import acme, { CsrBuffer } from "acme-client";
+import acme, { CsrBuffer, PrivateKeyBuffer } from "acme-client";
 import AcmeService from "acme-client";
 import { Challenge } from "acme-client/types/rfc8555";
 
@@ -21,7 +21,6 @@ const setupChallenges = async (
     const authorizations = await client.getAuthorizations(order);
 
     for (let auth of authorizations) {
-      console.log("Setting up challenge for ", auth.identifier.value);
       const selectedChallenge = auth.challenges.find(
         (ch) => ch.type === challengeType
       );
@@ -40,13 +39,15 @@ const setupChallenges = async (
       challenges: challenges,
     } as any;
 
-    req.session.save((err) => {
-      if (err) throw new Error("An error occurred while saving session data");
+    await new Promise<void>((resolve, reject) => {
+      req.session.save((err) => {
+        if (err) return reject("An error occurred while saving session data");
+        resolve();
+      });
     });
 
     return logChallengeInstruction(challenges);
   } catch (error) {
-    console.log("Challenge Error: ", error);
     throw new Error(
       "An error occured while setting up challenge. Please try again"
     );
@@ -75,8 +76,8 @@ const fetchDomainChallenge = async (
     const firstPartOfDomain = domain.split(".")[0];
     const dnsHost =
       firstPartOfDomain === mainDomain.split(".")[0]
-        ? "_acme_challenge"
-        : `_acme_challenge.${firstPartOfDomain}`;
+        ? "_acme-challenge"
+        : `_acme-challenge.${firstPartOfDomain}`;
 
     return {
       domain: domain,
@@ -124,6 +125,7 @@ const verifyChallenges = async (
       await client.completeChallenge(challenge.challenge);
       await client.waitForValidStatus(challenge.auth);
     } catch (error) {
+      console.log("Error: ", error);
       throw new Error(
         "Error occurred while verifying domain ownership, , restart the process or try again."
       );
@@ -133,13 +135,14 @@ const verifyChallenges = async (
 
 const generateCertificate = async (
   client: acme.Client,
-  order: AcmeService.Order,
+  order: acme.Order,
   csrCertificate: any
 ) => {
   try {
     const finalized = await client.finalizeOrder(order, csrCertificate);
     return await client.getCertificate(finalized);
   } catch (error) {
+    console.log(error);
     throw new Error(
       "Error occurred generating ssl certificate, restart the process or try again."
     );
@@ -147,13 +150,17 @@ const generateCertificate = async (
 };
 
 const getSSLData = async (
-  csrCertificate: acme.CsrBuffer,
-  csrCertificateKey: acme.CsrBuffer,
-  sslCertificate: string
+  csrCertificate: any,
+  csrCertificateKey: any,
+  sslCertificate: any
 ) => {
   return {
-    csrCertificate: csrCertificate.toString("utf-8").replace(/\n/g, ""),
-    csrCertificateKey: csrCertificateKey.toString("utf-8").replace(/\n/g, ""),
+    csrCertificate: Buffer.from(csrCertificate.data)
+      .toString("utf-8")
+      .replace(/\n/g, ""),
+    csrCertificateKey: Buffer.from(csrCertificateKey.data)
+      .toString("utf-8")
+      .replace(/\n/g, ""),
     sslCertificate: sslCertificate.replace(/\n/g, ""),
   };
 };

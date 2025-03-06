@@ -39,7 +39,7 @@ const validateCSR = async (req: CustomRequest, res: Response) => {
         throw new BadRequestError("CSR certificate is not Valid");
       }
       res.status(StatusCodes.SEE_OTHER).redirect("/domain/get-challenge");
-      return;
+      break;
 
     case true:
       const newCsrCertificate = await generateCsrCertificate(
@@ -61,12 +61,14 @@ const validateCSR = async (req: CustomRequest, res: Response) => {
         csrCertificate: newCsrCertificate.certificate,
       } as any;
 
-      req.session.save((err) => {
-        if (err) throw new Error("An error occurred while saving session data");
+      await new Promise<void>((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) return reject("An error occurred while saving session data");
+          resolve();
+        });
       });
-
       res.status(StatusCodes.SEE_OTHER).redirect("/domain/get-challenge");
-      return;
+      break;
 
     default:
       throw new BadRequestError(

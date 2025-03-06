@@ -43,7 +43,7 @@ const verifyDomainChallenge = async (req: CustomRequest, res: Response) => {
   const challenges = sessionData.challenges;
 
   try {
-    await executeWithTimeout(verifyChallenges(client, challenges), 60000);
+    await executeWithTimeout(verifyChallenges(client, challenges), 300000);
   } catch (error: any) {
     throw new Error(error.message);
   }
