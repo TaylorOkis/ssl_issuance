@@ -5,15 +5,23 @@ import {
   checkUserHasAcmeAccount,
 } from "@/middlewares/authentication";
 import generateSSLCertificate from "@/controllers/generate-ssl-certificate";
+import revokeSSLCertificate from "@/controllers/revoke-ssl-controller";
 
-const generateSSLRouter = express.Router();
+const sslRouter = express.Router();
 
-generateSSLRouter.get(
-  "/ssl",
+sslRouter.get(
+  "/generate-ssl",
   authenticateUser,
   checkUserHasAcmeAccount,
   sessionMiddleWare,
   generateSSLCertificate
 );
 
-export default generateSSLRouter;
+sslRouter.post(
+  "/revoke-ssl",
+  authenticateUser,
+  checkUserHasAcmeAccount,
+  revokeSSLCertificate
+);
+
+export default sslRouter;

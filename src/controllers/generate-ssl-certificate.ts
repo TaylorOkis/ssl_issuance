@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 
 import db from "@/database/db";
 import getSessionData from "@/utils/session/session";
-import DIRECTORY_URL from "@/utils/constants/constants";
+import { DIRECTORY_URL } from "@/utils/constants/constants";
 import { CustomRequest } from "@/types/types";
 import { BadRequestError, NotFoundError } from "@/utils/errors";
 import { generateCertificate, getSSLData } from "@/services/acme-services";

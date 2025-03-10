@@ -5,7 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import db from "@/database/db";
 import { CustomRequest } from "@/types/types";
 import { BadRequestError, NotFoundError } from "@/utils/errors";
-import DIRECTORY_URL from "@/utils/constants/constants";
+import { DIRECTORY_URL } from "@/utils/constants/constants";
 
 const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
   const { email } = req.user!;

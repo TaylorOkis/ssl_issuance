@@ -1,6 +1,5 @@
 import { CustomRequest } from "@/types/types";
 import acme, { CsrBuffer, PrivateKeyBuffer } from "acme-client";
-import AcmeService from "acme-client";
 import { Challenge } from "acme-client/types/rfc8555";
 
 const setupChallenges = async (
@@ -142,7 +141,6 @@ const generateCertificate = async (
     const finalized = await client.finalizeOrder(order, csrCertificate);
     return await client.getCertificate(finalized);
   } catch (error) {
-    console.log(error);
     throw new Error(
       "Error occurred generating ssl certificate, restart the process or try again."
     );
@@ -165,4 +163,26 @@ const getSSLData = async (
   };
 };
 
-export { setupChallenges, verifyChallenges, generateCertificate, getSSLData };
+const revokeSSL = async (
+  client: acme.Client,
+  sslCertificate: string | Buffer,
+  reason: number = 0
+) => {
+  console.log("ssl: ", sslCertificate);
+  try {
+    return await client.revokeCertificate(sslCertificate, { reason: reason });
+  } catch (error) {
+    console.log(error);
+    throw new Error(
+      "Error occurred revoking ssl certificate, restart the process or try again."
+    );
+  }
+};
+
+export {
+  setupChallenges,
+  verifyChallenges,
+  generateCertificate,
+  getSSLData,
+  revokeSSL,
+};

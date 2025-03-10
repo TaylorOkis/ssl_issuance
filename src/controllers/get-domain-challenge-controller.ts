@@ -6,7 +6,7 @@ import { Response } from "express";
 import getSessionData from "@/utils/session/session";
 import { setupChallenges } from "@/services/acme-services";
 import { StatusCodes } from "http-status-codes";
-import DIRECTORY_URL from "@/utils/constants/constants";
+import { DIRECTORY_URL } from "@/utils/constants/constants";
 
 const getDomainChallenge = async (req: CustomRequest, res: Response) => {
   const { id: userId } = req.user!;
