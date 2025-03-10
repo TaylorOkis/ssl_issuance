@@ -25,7 +25,7 @@ const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
 
   const privateKey = await acme.crypto.createPrivateKey();
 
-  // TODO: ENCRYPT PRIVATE KEY.
+  // TODO: POSSIBLY ENCRYPT PRIVATE KEY.
 
   const client = new acme.Client({
     directoryUrl: DIRECTORY_URL,

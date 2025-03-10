@@ -1,5 +1,6 @@
 import { CustomRequest } from "@/types/types";
-import acme, { CsrBuffer, PrivateKeyBuffer } from "acme-client";
+import { BadRequestError } from "@/utils/errors";
+import acme from "acme-client";
 import { Challenge } from "acme-client/types/rfc8555";
 
 const setupChallenges = async (
@@ -91,7 +92,6 @@ const fetchDomainChallenge = async (
   }
 };
 
-// TODO: Figure out what type of data is challenge
 const logChallengeInstruction = (challenges: Array<any>) => {
   let instruction = "";
   let challengeInstructions = [];
@@ -168,13 +168,14 @@ const revokeSSL = async (
   sslCertificate: string | Buffer,
   reason: number = 0
 ) => {
-  console.log("ssl: ", sslCertificate);
   try {
     return await client.revokeCertificate(sslCertificate, { reason: reason });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    if (error.message.includes("status other than revoked")) {
+      throw new BadRequestError("Certificate is already revoked.");
+    }
     throw new Error(
-      "Error occurred revoking ssl certificate, restart the process or try again."
+      "Error occurred revoking ssl certificate. Please confirm the certificate and try again."
     );
   }
 };

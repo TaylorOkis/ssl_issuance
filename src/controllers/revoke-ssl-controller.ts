@@ -41,7 +41,7 @@ const revokeSSLCertificate = async (req: CustomRequest, res: Response) => {
     accountUrl: existingUser.accountUrl!,
   });
 
-  const sslPem = await formatSSLPemString(ssl);
+  const sslPem = formatSSLPemString(ssl);
 
   const result = await revokeSSL(client, sslPem, reason);
 

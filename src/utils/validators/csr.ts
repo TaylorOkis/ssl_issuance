@@ -33,7 +33,7 @@ const generateCsrCertificate = async (
   };
 };
 
-const formatCSRPemString = async (pemString: string) => {
+const formatCSRPemString = (pemString: string) => {
   const cleanPem = pemString
     .replace(/-----BEGIN CERTIFICATE REQUEST-----/g, "")
     .replace(/-----END CERTIFICATE REQUEST-----/g, "")
@@ -43,7 +43,7 @@ const formatCSRPemString = async (pemString: string) => {
   return `-----BEGIN CERTIFICATE REQUEST-----\n${formattedPem}\n-----END CERTIFICATE REQUEST-----`;
 };
 
-const formatSSLPemString = async (pemString: string) => {
+const formatSSLPemString = (pemString: string) => {
   const cleanPem = pemString
     .replace(/-----BEGIN CERTIFICATE-----/g, "")
     .replace(/-----END CERTIFICATE-----/g, "")

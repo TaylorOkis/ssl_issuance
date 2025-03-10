@@ -4,6 +4,7 @@ import { BadRequestError, NotFoundError } from "@/utils/errors";
 import {
   validateCsrCertificate,
   generateCsrCertificate,
+  formatCSRPemString,
 } from "@/utils/validators/csr";
 import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
@@ -38,6 +39,19 @@ const validateCSR = async (req: CustomRequest, res: Response) => {
       if (!isCsrValid) {
         throw new BadRequestError("CSR certificate is not Valid");
       }
+
+      (req.session as any).userDataInput = {
+        ...(req.session as any).userDataInput,
+        csrCertificate: formatCSRPemString(csrCertificate),
+      } as any;
+
+      await new Promise<void>((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) return reject("An error occurred while saving session data");
+          resolve();
+        });
+      });
+
       res.status(StatusCodes.SEE_OTHER).redirect("/domain/get-challenge");
       break;
 
