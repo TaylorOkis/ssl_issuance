@@ -20,7 +20,7 @@ validateRouter.get(
   "/csr",
   authenticateUser,
   checkUserHasAcmeAccount,
-  sessionMiddleWare,
+ sessionMiddleWare,
   validateCSR
 );
 

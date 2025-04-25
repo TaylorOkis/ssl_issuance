@@ -4,6 +4,7 @@ import { Payload } from "@/types/types";
 import { UnauthenticatedError } from "../errors";
 
 const generateToken = ({ payload }: { payload: Payload }) => {
+  console.log('JWT_SECRET during signing:', process.env.JWT_SECRET?.substring(0, 5) + '...');
   if (!process.env.JWT_SECRET) {
     throw new UnauthenticatedError(
       "Missing JWT variable in environment variables"
@@ -21,6 +22,7 @@ const generateToken = ({ payload }: { payload: Payload }) => {
 };
 
 const verifyToken = ({ token }: { token: string }) => {
+  console.log('JWT_SECRET during verify:', process.env.JWT_SECRET?.substring(0, 5) + '...');
   if (!process.env.JWT_SECRET) {
     throw new Error("Missing JWT_SECRET in environment variables");
   }
@@ -40,10 +42,11 @@ const attachCookieToResponse = ({
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    expires: new Date(Date.now() + threeDays),
-    signed: true,
+  secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+  sameSite: process.env.NODE_ENV === 'strict',
+  signed: true,
+  maxAge: threeDays// 1 day
   });
 };
 
-export { verifyToken, attachCookieToResponse };
+export { verifyToken, attachCookieToResponse,generateToken };
