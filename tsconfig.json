@@ -10,8 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    "types": ["express"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

@@ -3,7 +3,6 @@ import {
   register,
   login,
   logOut,
-  verifySession,
   forgotPassword,
   verifyResetToken,
   changePassword,
@@ -16,7 +15,6 @@ const authRouter = express.Router();
 authRouter.post("/register", register);
 authRouter.post("/login", login);
 authRouter.get("/logout", logOut);
-authRouter.get("/verify-session", verifySession);
 authRouter.post("/forgot-password", forgotPassword);
 authRouter.get("/verify-reset-token", verifyResetToken);
 authRouter.post("/change-password", changePassword);

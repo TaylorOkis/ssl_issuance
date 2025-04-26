@@ -1,8 +1,7 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import crypto from "node:crypto";
-import { Payload } from "@/types/types";
+
 import db from "@/database/db";
 import { StatusCodes } from "http-status-codes";
 import {
@@ -21,145 +20,64 @@ const generateToken = () => {
 };
 
 const register = async (req: Request, res: Response) => {
-  console.log('=== REGISTRATION REQUEST START ===');
-  console.log('Request body:', req.body);
-  //added by zuby
-  try {
-    const { name, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-    if (!name || !email || !password) {
-      console.log('Missing fields detected');
-      throw new BadRequestError('Please provide name, email and password');
-    }
-//end
-    console.log('Checking for existing email...');
-    
+  const existingEmail = await db.user.findUnique({
+    where: { email },
+  });
 
-    const existingEmail = await db.user.findUnique({
-      where: { email },
-    });
-
-    if (existingEmail) {
-      //added by zuby
-      console.log(` Email already exists: ${email}`);
-      console.log(` Existing user details:`, {
-        id: existingEmail.id,
-        name: existingEmail.name,
-        createdAt: existingEmail.createdAt
-      });
-      //end
-      throw new BadRequestError("User already exists");
-    }
-
-    console.log("email: ", email);
-
-    console.log("password: ", password);
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("password: ", hashedPassword);
-
-    await db.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-      },
-    });
-
-    res
-      .status(StatusCodes.CREATED)
-      .json({ status: "success", message: "User Created Successfully" });
-  } catch (error) {
-    console.error('Registration error:', error);
-    throw error; 
-  } finally {
-    console.log('=== REGISTRATION REQUEST END ===');
+  if (existingEmail) {
+    throw new BadRequestError("User already exists");
   }
+
+  console.log("email: ", email);
+
+  console.log("password: ", password);
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log("password: ", hashedPassword);
+
+  await db.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+    },
+  });
+
+  res
+    .status(StatusCodes.CREATED)
+    .json({ status: "success", message: "User Created Successfully" });
 };
 
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const errorMessage = "Wrong username or password";
 
-  try {
-    const existingUser = await db.user.findUnique({ where: { email } });
-    if (!existingUser) throw new UnauthenticatedError(errorMessage);
-
-    const passwordMatch = await bcrypt.compare(password, existingUser.password);
-    if (!passwordMatch) throw new UnauthenticatedError(errorMessage);
-
-    const tokenUser = {
-      userId: existingUser.id,
-      email: existingUser.email,
-      username: existingUser.name
-    };
-
-    attachCookieToResponse({ res, user: tokenUser });
-    console.log('Set-Cookie Header:', res.getHeader('Set-Cookie'));
-    
-    res.status(200).json({ 
-      status: "success",
-      user: tokenUser
-    });
-
-  } catch (error) {
-    console.error("Login error:", error);
-    throw error;
-  }
-};
-// Added by zuby
-
-const verifySession = async (req: Request, res: Response) => {
-  console.log('[BACKEND] Incoming cookies:', req.cookies);
-  console.log('Incoming cookies:', req.cookies); 
-  console.log('Headers:', req.headers); 
-
-
-  const token = req.signedCookies.accessToken || req.cookies.accessToken;
-  
-  if (!token) {
-    console.warn('[BACKEND] No token found');
-    return res.status(200).json({ loggedIn: false });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('[BACKEND] Decoded token:', decoded);
-    const user = await db.user.findUnique({
-      where: { id: decoded.userId },
-      select: { 
-        email: true, 
-        name: true,
-       
-      }
-    });
-
-    if (!user) {
-      console.warn('[BACKEND] User not found');
-      return res.status(200).json({ loggedIn: false }); 
-    }
-    console.log('[BACKEND] Session valid for:', user.email);
-    res.setHeader('Cache-Control', 'no-store');
-    res.status(200).json({ 
-      loggedIn: true,
-      user: {
-        email: user.email,
-        name: user.name
-      }
-    });
-  } catch (err) {
-    console.error('[BACKEND] Token verification failed:', err);
-    res.status(200).json({ loggedIn: false });
-  }
-};
-//end
-const logOut = (req: Request, res: Response) => {
-  res.clearCookie("accessToken", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path: "/"
+  const existingUser = await db.user.findUnique({
+    where: { email },
   });
+
+  if (!existingUser) {
+    throw new UnauthenticatedError(errorMessage);
+  }
+
+  const passwordMatch = await bcrypt.compare(password, existingUser.password);
+  if (!passwordMatch) {
+    throw new UnauthenticatedError(errorMessage);
+  }
+
+  const { password: savedPassword, ...tokenUser } = existingUser;
+  attachCookieToResponse({ res, user: tokenUser });
+
+  res
+    .status(StatusCodes.OK)
+    .json({ status: "success", message: "User Login Successfully" });
+};
+
+const logOut = (req: Request, res: Response) => {
+  res.clearCookie("accessToken");
+
   res.status(StatusCodes.OK).json({ status: "success" });
 };
 
@@ -326,7 +244,6 @@ export {
   register,
   login,
   logOut,
-  verifySession,
   forgotPassword,
   verifyResetToken,
   changePassword,

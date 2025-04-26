@@ -1,10 +1,9 @@
-
 import express from "express";
 import "express-async-errors";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { handleJWTErrors } from "./middlewares/error-middleware";
+
 import "./utils/cron_jobs/token-cleanup";
 import morganMiddleware from "./middlewares/morgan";
 import authRouter from "./routes/auth-router";
@@ -19,20 +18,9 @@ import sslRouter from "./routes/ssl-router";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization','Cache-Control','Cookie'],
-  exposedHeaders: ['set-cookie'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  
-
-};
 
 app.use(express.json());
-app.use(cors(corsOptions));
-
-
+app.use(cors());
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morganMiddleware);
 

@@ -15,7 +15,6 @@ const sessionMiddleWare = session({
     maxAge: 1000 * 60 * 60 * 24, // expires in 1 day
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
-    sameSite: 'lax',
   },
 });
 
