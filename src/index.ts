@@ -19,8 +19,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morganMiddleware);
 

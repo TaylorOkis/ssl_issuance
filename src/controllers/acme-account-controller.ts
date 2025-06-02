@@ -86,4 +86,23 @@ const deleteAcmeAccount = async (req: CustomRequest, res: Response) => {
     .json({ status: "success", message: "ACME account deleted successfully" });
 };
 
-export { creatAcmeAccount, deleteAcmeAccount };
+const checkAcmeAccount = async (req: CustomRequest, res: Response) => {
+  const { id } = req.user!;
+
+  const existingUser = await db.user.findUnique({
+    where: { id },
+    select: { accountKey: true, accountUrl: true },
+  });
+
+  console.log(
+    `Account Key: ${existingUser?.accountKey}\n Account Url: ${existingUser?.accountUrl}`
+  );
+
+  if (existingUser?.accountUrl === null || existingUser?.accountKey === null) {
+    throw new NotFoundError("No acme account details found");
+  }
+
+  res.status(StatusCodes.OK).json({ status: "success", message: "true" });
+};
+
+export { creatAcmeAccount, deleteAcmeAccount, checkAcmeAccount };
