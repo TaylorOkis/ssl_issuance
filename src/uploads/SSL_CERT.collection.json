@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "c61cfc02-95dd-4ad9-a3c7-b48f7d7687c9",
+		"name": "SSL_CERT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38899066"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Taylor\",\r\n    \"email\": \"dabataylor2@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dabataylor2@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogOut User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Verification Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dabataylor2@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/auth/send-verification-email",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"send-verification-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/auth/verify-email?token=1b8ed8067fa6df05a27b859e65a4b884bdad3363b2e50e9de7874b3b5f84ceb2",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"verify-email"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "1b8ed8067fa6df05a27b859e65a4b884bdad3363b2e50e9de7874b3b5f84ceb2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Reset Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dabataylor2@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/auth/verify-reset-token",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"verify-reset-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/auth/change-password",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"taylorokis@yahoo.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/auth/forgot-password",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ACME",
+			"item": [
+				{
+					"name": "Create Acme Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/acme/create-acme-account",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"acme",
+								"create-acme-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ACME Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/acme/delete-acme-account",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"acme",
+								"delete-acme-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check account status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/acme/status",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"acme",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validation",
+			"item": [
+				{
+					"name": "Validate Email and Domain, Validate CSR, Generate Domain Challenges",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"domain\": \"cloudinternsatgb.xyz\",\r\n    \"subDomain\": \"www.cloudinternsatgb.xyz\",\r\n    \"email\": \"wztaylor.t@gmail.com\",\r\n    \"autoGenerateCsr\": false,\r\n    \"csrCertificate\": \"-----BEGIN CERTIFICATE REQUEST-----MIICvTCCAaUCAQAwHzEdMBsGA1UEAwwUY2xvdWRpbnRlcm5zYXRnYi54eXowggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDGE3WFwpxjdC2Bdiy42KWBc9D/ZNGpN7wVnj35q5IQUAD2A5FhpihwjiKCCToelMlbBDg8E0HFHg9tOopLLN1Z7JRv5k0X6S1Dd7guvywzWpOAE6wJk5FPhGzbWOvowthXb3dqCy7NQp1W3R0AOhPxgS3ZJrMbaiNHLjMYxQO/DKGBZ49UZV1QD43r2nc5SaO6vlVpGPRPgVDAZ113S/fTbJ8ti/Rn7FnQ5tdLAjVhIMH3ikPATSqEN3QF7LOMX1A7AWHT1/gvEc8e204otFgY1JxtqcU3jN1Pmn21tk3agjWRzC8A/65LhAaPrNcWSrTofV4DJs3cNqp1lBh1kWAdAgMBAAGgWTBXBgkqhkiG9w0BCQ4xSjBIMAsGA1UdDwQEAwIFoDA5BgNVHREEMjAwghRjbG91ZGludGVybnNhdGdiLnh5eoIYd3d3LmNsb3VkaW50ZXJuc2F0Z2IueHl6MA0GCSqGSIb3DQEBCwUAA4IBAQBqmQN9b8KPqJw/t1npmnCNywR3LfkUgUuNFe3z+Ix15wl4D/hIxhQlxVtI5lHWqqR4vzWzY555AuRWaiTKo5LRw5zQS8IdmvcqWJJdeVyNUykM4KmQKp5ERTMxLe7qvsIuHVBlmpQU+HqOkTnYFm8U0BBg2tTbx/T13ALxPMslynL1mWr9wmoXNSsSTN5AiKh0djmos8wDA7KtdTDNCh8n1NGq/rN2QtxDiwRAVARIuQCYsGL3M0MaYnV0b0RNWA9TiHzVvTwch3a30hW5cbghNgNNLiqaYp8bXIG6/T0eItfjOI9MwhWz9uLsRomCGZhax0TjwNztka9SPcNX9wbl-----END CERTIFICATE REQUEST-----\",\r\n    \"challenge\": \"dns-01\",\r\n    \"keySize\": 2048\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/validate/email-and-domain",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"validate",
+								"email-and-domain"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verification",
+			"item": [
+				{
+					"name": "Verify Domain and Generate SSL certificate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/verify/verify-domain",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"verify",
+								"verify-domain"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Verify Domain and Generate SSL certificate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/verify/verify-domain",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"verify",
+										"verify-domain"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "connect.sid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "6564"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19a4-AiKU8UaJTtKBYneCm95Dwd1KpMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Mar 2025 09:08:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"csrCertificate\": \"-----BEGIN CERTIFICATE REQUEST-----MIICvTCCAaUCAQAwHzEdMBsGA1UEAwwUY2xvdWRpbnRlcm5zYXRnYi54eXowggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCeF0m8qoVDzG1bqrzfANR0patlYGX9sSHcxLOWKec0McaaCFi9BSf3eIeRGsiuBJa96KuOM10S3xh0hJKc8vqFaWdLu6IwrStwnZ+iFeCfTcu4GeB7ogaxj2ysFQ8BQGnxAWME53X49TcBxbcqT7G2ljkvdA39M87QQ3JUo7bNfxLCy97MzTwy+yeqI3b7ZaYK8dha+tUwT3E8xFQQfmeZ+th8TL/TZ5QSPJjB3YR1pJB94bmQKKymibHVS7XimzDc/dtTE5N0i2fjOD6tOd5Cbx2fB7KznrUqy7C0IlDMsEZ65bKL3oywqJzbaMM+2nZHQqGEaqGzqx/aEI9CMP19AgMBAAGgWTBXBgkqhkiG9w0BCQ4xSjBIMAsGA1UdDwQEAwIFoDA5BgNVHREEMjAwghRjbG91ZGludGVybnNhdGdiLnh5eoIYd3d3LmNsb3VkaW50ZXJuc2F0Z2IueHl6MA0GCSqGSIb3DQEBCwUAA4IBAQBfaKREb8blNm7DcUKdtUMmp0ywEp+RmZ/2JHT8IUFT8N/a5q90lp4arxjZJ+EG0DYsCZ2cXIRJ10zUvDJPFofJsKHj5+fouvyByP7UPUsPUZdMc3BdVePHzA7OKSw5inqt7ejNrGItl4qmLBxdE38HkJXe90t846URMk2S6vv5ifMRyt1Vp7/7n/fxmCth+RNOi1glsmlxy0M57TWVOzJ9ABzFS5FLwSx/kvEVUIoWH1GcJLqheJsP811OoZb5MGgYs+FuxJwClw9tvq2WeJUNV45/QW0dgLa/CUu35zEmTaeF2Umkx7oFYfkOZNKw0dnylFocY3tpn3dvdgmj8l6X-----END CERTIFICATE REQUEST-----\",\n        \"csrCertificateKey\": \"-----BEGIN PRIVATE KEY-----MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCeF0m8qoVDzG1bqrzfANR0patlYGX9sSHcxLOWKec0McaaCFi9BSf3eIeRGsiuBJa96KuOM10S3xh0hJKc8vqFaWdLu6IwrStwnZ+iFeCfTcu4GeB7ogaxj2ysFQ8BQGnxAWME53X49TcBxbcqT7G2ljkvdA39M87QQ3JUo7bNfxLCy97MzTwy+yeqI3b7ZaYK8dha+tUwT3E8xFQQfmeZ+th8TL/TZ5QSPJjB3YR1pJB94bmQKKymibHVS7XimzDc/dtTE5N0i2fjOD6tOd5Cbx2fB7KznrUqy7C0IlDMsEZ65bKL3oywqJzbaMM+2nZHQqGEaqGzqx/aEI9CMP19AgMBAAECggEANZWUJzAvImdYi9EH2ph36p+6xA5UE5Sl8yPy8Qt78+uJMu1wUoU8YjuGy86lxaIFjBIgj/7l5b8blWbYIP2Un4K2Aevz0gboKfArSu+aZrSiP+D5fz5QgX+pKHyszNJN9mPvcZqYmI1ZGy8uYdeIV2h8spJmKXQVfe7WgkzJacZHr6qKDcn4BJ2vZI4+5hDh9EHMBQmXu8bQsB6CxoRjlVqbzQvCb/yHxLqtRGePyt3LcMUPVvpIR/DlINoyu3Z89H8JtmUQ4EBSfJtjKZ6jJsV9dS5KUkP/HzZ2TDlkIcipoZq+cDa8Dn9nKt0KWOFV+7I1O9V9UQVSHhOrS9oICwKBgQDJMc62OWxgBILcVzAgh3oktfV1ZKwxIL3aKawpJkJn0umWu5Ho1xEqRIpCALLwhmq13Gyi6z/OR+UzVUhflx2DZNMFeZil3uXKC78jo8heOxjalZCxW6yuMCKIGyejD/MQFTjjWeoKiheIzszj+bf8HXGM1N97fRszYVqi5BAvTwKBgQDJJ6zaY7lkyVcBa5Ul9y5XaPANWS44ISAx6zkYK4ZQWTgdohpML/Bgw+m22dG6L2krkRHKudewN5hu1GFb42A3U3BR71JbzqUbU8imiQ/+ZuEfvEJcd6Dg7bNStjhzptJjyI6QEHUD5w+wyo29m5tZFPMJ4wJunyDdtbTmKtEzcwKBgQCfU6UqI0FSrF/hE96V9BNjHQF77LR71zzhllyy3Yx64ch/yJxcsmvyeAKxEBKkbR32VM9nGTsXJVI5m5DLukTx95cw38FloaWBolnEZIBZNx2QhB7ohPuzmYTPGgoClK/cjaHWUS8JF6BZg8M3ylrL+ZkheLZd+Y3f23nGQysZ+wKBgA8HB8LI8HC3GejhQKM1dCDTlhtpLirDTsRr7jgACGi4QZj1I0HN0wdnm24tl51xLUoz7EBY4eQoQxsEgsF6mxWHBj0Yw+5X4b3I5JSMaMV4qhjU16BQz5P+Lgdf1ZfOPql1sjDRCezgtite9nfTyCc/iWiTrPrWqH3ntTv8tuRBAoGBAKYS2c3T7ZH8esynpUsPXyTFeZHQguxfbuV38MkY3YLUISfrWMfD6ZftFM9feNX9GBUH3iTUEJsHSUI4e3Ozx9QZf4dOziM5WC9lSfhrV36L42h8NCKDW6xuLH+BO8eX92neZUrFN1WRwhTN7WSaZUgACXHBCAhIM0MJ62LbNggy-----END PRIVATE KEY-----\",\n        \"sslCertificate\": \"-----BEGIN CERTIFICATE-----MIIFdTCCBF2gAwIBAgISLNi/RudMag8v/IOLWauLZ76uMA0GCSqGSIb3DQEBCwUAMFoxCzAJBgNVBAYTAlVTMSAwHgYDVQQKExcoU1RBR0lORykgTGV0J3MgRW5jcnlwdDEpMCcGA1UEAxMgKFNUQUdJTkcpIFdhbm5hYmUgV2F0ZXJjcmVzcyBSMTEwHhcNMjUwMzEwMDgxMDAzWhcNMjUwNjA4MDgxMDAyWjAfMR0wGwYDVQQDExRjbG91ZGludGVybnNhdGdiLnh5ejCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ4XSbyqhUPMbVuqvN8A1HSlq2VgZf2xIdzEs5Yp5zQxxpoIWL0FJ/d4h5EayK4Elr3oq44zXRLfGHSEkpzy+oVpZ0u7ojCtK3Cdn6IV4J9Ny7gZ4HuiBrGPbKwVDwFAafEBYwTndfj1NwHFtypPsbaWOS90Df0zztBDclSjts1/EsLL3szNPDL7J6ojdvtlpgrx2Fr61TBPcTzEVBB+Z5n62HxMv9NnlBI8mMHdhHWkkH3huZAorKaJsdVLteKbMNz921MTk3SLZ+M4Pq053kJvHZ8HsrOetSrLsLQiUMywRnrlsovejLConNtowz7adkdCoYRqobOrH9oQj0Iw/X0CAwEAAaOCAm4wggJqMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUTQcKJ/cHONv4KDJTfHAUY1A46jowHwYDVR0jBBgwFoAUE8vX9q6d/GlCZNZcfCPMhflHx7YwXwYIKwYBBQUHAQEEUzBRMCYGCCsGAQUFBzABhhpodHRwOi8vc3RnLXIxMS5vLmxlbmNyLm9yZzAnBggrBgEFBQcwAoYbaHR0cDovL3N0Zy1yMTEuaS5sZW5jci5vcmcvMDkGA1UdEQQyMDCCFGNsb3VkaW50ZXJuc2F0Z2IueHl6ghh3d3cuY2xvdWRpbnRlcm5zYXRnYi54eXowEwYDVR0gBAwwCjAIBgZngQwBAgEwMgYDVR0fBCswKTAnoCWgI4YhaHR0cDovL3N0Zy1yMTEuYy5sZW5jci5vcmcvNDcuY3JsMIIBBAYKKwYBBAHWeQIEAgSB9QSB8gDwAHcAIeUaRNi551QOp/vgutd3NhVgZoTRWusz5kW06VXziIMAAAGVf1Ak8AAABAMASDBGAiEA/O5T36x9/Sv8YEagMjJAumBxoTdCgx1lsv8yJbOwem0CIQCTB5OhO6R71zAzioyngIKUNjm5NOrm7yY8wWSFCpvcWQB1ACh2GhiQJ/vvPNDWGgGNdrBQVynHp0EbzL32BPRdQmFTAAABlX9QJQgAAAQDAEYwRAIgYSewVbqESonO5ElhE0OgKOV3x23/KVS+Rt2gNVgQ0o0CIAIxFrIth4YG2ouJ5nqEkWa/2nGBjcMPsJo2rst9pybGMA0GCSqGSIb3DQEBCwUAA4IBAQB6bOSLQ7m840pw5JDBuJpUvRPcINhZ5GcsszfZTnQiqs6bLsIcQn0NVYNiDCo++k2adHivJvWNJGArEqRPQIMzsko5T4mQ9I+FsHYsp5B4mJS5wUfdFhDFW0CKcEQyUcDqKymAQHL9Ewrc5f4g2VR5OAVic5wq6vTOB9i9MS43oPLJBrj/HAWXBUxr48FE7aMK2yiYK4j3FbplghQ8AHCTDNDSGSkbBP1vhjXbkAVwN2QvOk/x28csmmEpEbIpaDdozz6bg4gBy8JXBf5hTeSZk4igh6Z9HRvavpqFzcvGNfv5ACOg5yVYA72MA3OGqrVzO/EXbYuq2uSVx/Hyqp/a-----END CERTIFICATE----------BEGIN CERTIFICATE-----MIIFTTCCAzWgAwIBAgIRAOOuDiVgQFyATegPOxfOa5IwDQYJKoZIhvcNAQELBQAwZjELMAkGA1UEBhMCVVMxMzAxBgNVBAoTKihTVEFHSU5HKSBJbnRlcm5ldCBTZWN1cml0eSBSZXNlYXJjaCBHcm91cDEiMCAGA1UEAxMZKFNUQUdJTkcpIFByZXRlbmQgUGVhciBYMTAeFw0yNDAzMTMwMDAwMDBaFw0yNzAzMTIyMzU5NTlaMFoxCzAJBgNVBAYTAlVTMSAwHgYDVQQKExcoU1RBR0lORykgTGV0J3MgRW5jcnlwdDEpMCcGA1UEAxMgKFNUQUdJTkcpIFdhbm5hYmUgV2F0ZXJjcmVzcyBSMTEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCVYHwe2gxMv9Jh/d1BgocW3am5E/iBOrLkyENgRqLmVl6vNRXgoKpPjtP40Mv17Z2LlYhRsneaK9gdSNmNTxJlY8viqs9dk4XwKJxDPfl/vJBW4M/nJzFwS30qu7VF8jSfyF82Q7KkLl5NxJ39Y5yvQFzHjL3YCO8coMG5v72DDgWzc+9wk2ncoXiB3/3mVg4RtD1w1xPpdjtSh5keB7jqgnD2/I75OLBzamy6NL9nguaEc8cX8CdnpoCCQI8/Fz9qhPtJjP+O/RHCugWVkSptuCRra8tcnJTGHRiNr/GyYsHZZ4jZ76hbJjxapwf24E8RAVzuMRsw/nS6/hUJ8lqPAgMBAAGjggEAMIH9MA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUE8vX9q6d/GlCZNZcfCPMhflHx7YwHwYDVR0jBBgwFoAUtfNl8v6wCpIf+zx980SgrGMlwxQwNgYIKwYBBQUHAQEEKjAoMCYGCCsGAQUFBzAChhpodHRwOi8vc3RnLXgxLmkubGVuY3Iub3JnLzATBgNVHSAEDDAKMAgGBmeBDAECATArBgNVHR8EJDAiMCCgHqAchhpodHRwOi8vc3RnLXgxLmMubGVuY3Iub3JnLzANBgkqhkiG9w0BAQsFAAOCAgEAeD9pt5sWtXEQyF94RMzolF+uip+ODYaNxPEJG/93xtxPc6QC0bsC9QIgv6dBk+s1LUf5ulIlJZQ1UlkLgTH4HzHi37O4ivcbSHpILcgD0hKnftv0E8o9SNAaIcO7DKNmbeWQ6cPlfOlRtpcIXYoc95wY9AipN0/ken5KxDxdxTSKuWS7Ae+ZWh7hmLdfDc5C85o2omLvM/6Ovmp0xUSPU/xFR1fk0kRmM975smehEOXSHOJ24zFaY6BnMUWa67yLawbxUj0AqzGmohdqz7LuDhtKd9oXJgRzacFzuMSQluN0ivwKIzirpLR/AJoz4nHXIaDQRyfaA3jr1VYpK+bApoIXAjgxR/vEFtbEHw7fNO3FKRCddvyJ0vh+OKIrY0nrbGUoyRlPlKF/9XrQ3UJoZc708mBBjzqijXdUQ0TB1/irAAQ7O/6i+ThQxElt77gYWzv2/8sSoagzqRKXOqLJckNJQIA39t4HMIFgqxDLRuRNtooFUeoOvocDWTQr80bUp6357cBtAl7ypcOzrPK6m5cuuyZfQ7zdh5ufcfMdFbgjwfeN8d442EzBnLxoMA9T2Igfn7KOhFl3znZ+WJhSh+oyBS8PrKUKB2Xo9pnXma6123xyFPDapnuK3iiNpGJfI0sULCqjEodYG+aGyfCzZFLWftbU683YxZCOddgYxHI=-----END CERTIFICATE-----\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Revoke SSL Certificate",
+			"item": [
+				{
+					"name": "Revoke SSL",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ssl\": \"-----BEGIN CERTIFICATE-----MIIFfDCCBGSgAwIBAgISLC0aw3iFfyihLR1j1a+sgTzXMA0GCSqGSIb3DQEBCwUAMFoxCzAJBgNVBAYTAlVTMSAwHgYDVQQKExcoU1RBR0lORykgTGV0J3MgRW5jcnlwdDEpMCcGA1UEAxMgKFNUQUdJTkcpIENvdW50ZXJmZWl0IENhc2hldyBSMTAwHhcNMjUwMzEwMTM0OTUzWhcNMjUwNjA4MTM0OTUyWjAfMR0wGwYDVQQDExRjbG91ZGludGVybnNhdGdiLnh5ejCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMYTdYXCnGN0LYF2LLjYpYFz0P9k0ak3vBWePfmrkhBQAPYDkWGmKHCOIoIJOh6UyVsEODwTQcUeD206ikss3VnslG/mTRfpLUN3uC6/LDNak4ATrAmTkU+EbNtY6+jC2Fdvd2oLLs1CnVbdHQA6E/GBLdkmsxtqI0cuMxjFA78MoYFnj1RlXVAPjevadzlJo7q+VWkY9E+BUMBnXXdL99Nsny2L9GfsWdDm10sCNWEgwfeKQ8BNKoQ3dAXss4xfUDsBYdPX+C8Rzx7bTii0WBjUnG2pxTeM3U+afbW2TdqCNZHMLwD/rkuEBo+s1xZKtOh9XgMmzdw2qnWUGHWRYB0CAwEAAaOCAnUwggJxMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUDrcP6Ici6BQZPgugm4ldW2zNZoQwHwYDVR0jBBgwFoAUpFJG6lioj2jYt7GQ0UpCSo9rKHEwXwYIKwYBBQUHAQEEUzBRMCYGCCsGAQUFBzABhhpodHRwOi8vc3RnLXIxMC5vLmxlbmNyLm9yZzAnBggrBgEFBQcwAoYbaHR0cDovL3N0Zy1yMTAuaS5sZW5jci5vcmcvMDkGA1UdEQQyMDCCFGNsb3VkaW50ZXJuc2F0Z2IueHl6ghh3d3cuY2xvdWRpbnRlcm5zYXRnYi54eXowEwYDVR0gBAwwCjAIBgZngQwBAgEwMgYDVR0fBCswKTAnoCWgI4YhaHR0cDovL3N0Zy1yMTAuYy5sZW5jci5vcmcvODguY3JsMIIBCwYKKwYBBAHWeQIEAgSB/ASB+QD3AHUAFuhpwdGV6tfD+Jca4/B2AfeM4badMahSGLaDfzGoFQgAAAGVgIdGMAAABAMARjBEAiAhV6h21aEVUHdZpOtEA5EM5bnNCZkgczUp3PHKOQ7QmQIgFwbud017eqOnPO0kbwNBA8T/F3eyJTXR0Ay8RJXcabUAfgAJyoT1CvhLQj+Tyf9rDtlvnS8Usrw3pVMOSUhicpoitQAAAZWAh0ioAAgAAAUAbrYjMgQDAEcwRQIgejWvVU8AXJMUxwlUWtKHzFcUZIcqT4sJw7v3luxr8cgCIQCLxIVTS4qSZNKnDOHVIMYCQJK0MmLasUXe7mh/pNmzozANBgkqhkiG9w0BAQsFAAOCAQEAYHbXtQZsLQLqxmY1u5IkbkMl8xNDEt5Ckq+pK4BuF7X2MMELGn4+ygJ2bKbITrqHTfO+/xmlLU6BXxj8XyO8CR4upY9dEr9dn6RKMqJSAscwOF2S3wuzNXWX15tBNerwQlucWT1daso16vV/i4bDdj8qOF2HunUZnbygC+AYvoD6IOpzAWds8nL1/URrz09ScSr3FpnzMUA5pJbuL7ycwZPcu76pe3Qrp05XN20YB7ZBh/O2OeXf2fyft9h/jolt9CsTm5DA9AwKiDPjn9IeidG88Y+7qWP8GPE18A2G1IXC7+0KUCdEUfOM5bJXLwd8TIijoQ/px6/7Ps8XDSs7cQ==-----END CERTIFICATE-----\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/ssl/revoke-ssl",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"ssl",
+								"revoke-ssl"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
