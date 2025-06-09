@@ -1,12 +1,12 @@
-import db from "@/database/db";
+import db from "@/database/db.js";
 import acme from "acme-client";
-import { CustomRequest } from "@/types/types";
-import { BadRequestError, NotFoundError } from "@/utils/errors";
+import { CustomRequest } from "@/types/types.js";
+import { BadRequestError, NotFoundError } from "@/utils/errors/index.js";
 import { Response } from "express";
-import getSessionData from "@/utils/session/session";
-import { setupChallenges } from "@/services/acme-services";
+import getSessionData from "@/utils/session/session.js";
+import { setupChallenges } from "@/services/acme-services.js";
 import { StatusCodes } from "http-status-codes";
-import { DIRECTORY_URL } from "@/utils/constants/constants";
+import { DIRECTORY_URL } from "@/utils/constants/constants.js";
 
 const getDomainChallenge = async (req: CustomRequest, res: Response) => {
   const { id: userId } = req.user!;

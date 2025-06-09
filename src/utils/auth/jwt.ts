@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Response } from "express";
-import { Payload } from "@/types/types";
-import { UnauthenticatedError } from "../errors";
+import { Payload } from "@/types/types.js";
+import { UnauthenticatedError } from "../errors/index.js";
 
 const generateToken = ({ payload }: { payload: Payload }) => {
   if (!process.env.JWT_SECRET) {

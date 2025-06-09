@@ -1,12 +1,12 @@
-import { verifyToken } from "@/utils/auth/jwt";
+import { verifyToken } from "@/utils/auth/jwt.js";
 import {
   NotFoundError,
   UnauthenticatedError,
   UnauthorizedError,
-} from "@/utils/errors";
+} from "@/utils/errors/index.js";
 import { Response, NextFunction } from "express";
-import { Payload, CustomRequest } from "@/types/types";
-import db from "@/database/db";
+import { Payload, CustomRequest } from "@/types/types.js";
+import db from "@/database/db.js";
 
 const authenticateUser = async (
   req: CustomRequest,

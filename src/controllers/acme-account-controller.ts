@@ -2,10 +2,10 @@ import acme from "acme-client";
 import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import db from "@/database/db";
-import { CustomRequest } from "@/types/types";
-import { BadRequestError, NotFoundError } from "@/utils/errors";
-import { DIRECTORY_URL } from "@/utils/constants/constants";
+import db from "@/database/db.js";
+import { CustomRequest } from "@/types/types.js";
+import { BadRequestError, NotFoundError } from "@/utils/errors/index.js";
+import { DIRECTORY_URL } from "@/utils/constants/constants.js";
 
 const creatAcmeAccount = async (req: CustomRequest, res: Response) => {
   const { email } = req.user!;

@@ -3,21 +3,31 @@ import "express-async-errors";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "node:url";
 
-import "./utils/cron_jobs/token-cleanup";
-import morganMiddleware from "./middlewares/morgan";
-import authRouter from "./routes/auth-router";
-import notFound from "./middlewares/not-found";
-import errorHandler from "./middlewares/error-handler";
-import acmeRouter from "./routes/acme-router";
-import validateRouter from "./routes/validate-router";
-import domainRouter from "./routes/domain-router";
-import verifyRouter from "./routes/verify-router";
-import sslRouter from "./routes/ssl-router";
+import "./utils/cron_jobs/token-cleanup.js";
+import morganMiddleware from "./middlewares/morgan.js";
+import authRouter from "./routes/auth-router.js";
+import notFound from "./middlewares/not-found.js";
+import errorHandler from "./middlewares/error-handler.js";
+import acmeRouter from "./routes/acme-router.js";
+import validateRouter from "./routes/validate-router.js";
+import domainRouter from "./routes/domain-router.js";
+import verifyRouter from "./routes/verify-router.js";
+import sslRouter from "./routes/ssl-router.js";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const filePath = path.join(__dirname, "uploads", "SSL_CERT.swagger.json");
+
+const swaggerDocument = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -32,6 +42,8 @@ app.use(morganMiddleware);
 app.get("/", (req, res) => {
   res.status(200).send("App is running perfectly");
 });
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/auth", authRouter);
 app.use("/acme", acmeRouter);

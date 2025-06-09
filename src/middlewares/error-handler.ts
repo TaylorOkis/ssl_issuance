@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
-import { CustomAPIError } from "@/utils/errors/index";
+import { CustomAPIError } from "@/utils/errors/index.js";
 
 const errorHandler = (
   error: Error | CustomAPIError,

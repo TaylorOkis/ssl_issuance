@@ -1,14 +1,14 @@
 import acme from "acme-client";
 import { Response } from "express";
 
-import db from "@/database/db";
-import { DIRECTORY_URL } from "@/utils/constants/constants";
-import getSessionData from "@/utils/session/session";
-import { CustomRequest } from "@/types/types";
-import { BadRequestError, NotFoundError } from "@/utils/errors";
+import db from "@/database/db.js";
+import { DIRECTORY_URL } from "@/utils/constants/constants.js";
+import getSessionData from "@/utils/session/session.js";
+import { CustomRequest } from "@/types/types.js";
+import { BadRequestError, NotFoundError } from "@/utils/errors/index.js";
 import { StatusCodes } from "http-status-codes";
-import { verifyChallenges } from "@/services/acme-services";
-import executeWithTimeout from "@/utils/timeout/execute-with-timeout";
+import { verifyChallenges } from "@/services/acme-services.js";
+import executeWithTimeout from "@/utils/timeout/execute-with-timeout.js";
 
 const verifyDomainChallenge = async (req: CustomRequest, res: Response) => {
   const { id: userId } = req.user!;

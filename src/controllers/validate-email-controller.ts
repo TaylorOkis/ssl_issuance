@@ -1,7 +1,7 @@
 import { Response } from "express";
-import validateDomainAndEmail from "@/utils/validators/domain-and-email";
-import { CustomRequest } from "@/types/types";
-import { BadRequestError } from "@/utils/errors";
+import validateDomainAndEmail from "@/utils/validators/domain-and-email.js";
+import { CustomRequest } from "@/types/types.js";
+import { BadRequestError } from "@/utils/errors/index.js";
 import { StatusCodes } from "http-status-codes";
 
 const validateEmailAndDomain = async (req: CustomRequest, res: Response) => {

@@ -1,4 +1,4 @@
-import logger from "@/utils/log/logger";
+import logger from "@/utils/log/logger.js";
 import morgan, { StreamOptions } from "morgan";
 
 const morganFormat = ":method :url :status :response-time ms";

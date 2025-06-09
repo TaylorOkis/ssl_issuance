@@ -1,16 +1,16 @@
 import acme from "acme-client";
 
-import db from "@/database/db";
+import db from "@/database/db.js";
 import {
   DIRECTORY_URL,
   VALID_REVOCATION_REASONS,
-} from "@/utils/constants/constants";
-import { CustomRequest } from "@/types/types";
-import { BadRequestError, NotFoundError } from "@/utils/errors";
+} from "@/utils/constants/constants.js";
+import { CustomRequest } from "@/types/types.js";
+import { BadRequestError, NotFoundError } from "@/utils/errors/index.js";
 import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { revokeSSL } from "@/services/acme-services";
-import { formatSSLPemString } from "@/utils/validators/csr";
+import { revokeSSL } from "@/services/acme-services.js";
+import { formatSSLPemString } from "@/utils/validators/csr.js";
 
 const revokeSSLCertificate = async (req: CustomRequest, res: Response) => {
   const { id: userId } = req.user!;

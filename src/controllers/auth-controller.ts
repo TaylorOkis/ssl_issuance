@@ -2,16 +2,16 @@ import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import crypto from "node:crypto";
 
-import db from "@/database/db";
+import db from "@/database/db.js";
 import { StatusCodes } from "http-status-codes";
 import {
   BadRequestError,
   NotFoundError,
   UnauthenticatedError,
-} from "@/utils/errors";
-import { attachCookieToResponse } from "@/utils/auth/jwt";
-import generateEmail from "@/services/email/email-template";
-import sendEmail from "@/services/email/email-service";
+} from "@/utils/errors/index.js";
+import { attachCookieToResponse } from "@/utils/auth/jwt.js";
+import generateEmail from "@/services/email/email-template.js";
+import sendEmail from "@/services/email/email-service.js";
 
 const generateToken = () => {
   const min = 100000;

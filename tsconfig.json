@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2016",
+    "module": "nodenext",
+    "target": "ES2020",
+    "moduleResolution": "nodenext",
     "noImplicitAny": true,
     "removeComments": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "rootDir": "./src",
     "outDir": "./dist",
     "baseUrl": ".",

@@ -1,7 +1,7 @@
-import { CustomRequest } from "@/types/types";
-import { BadRequestError } from "@/utils/errors";
+import { CustomRequest } from "@/types/types.js";
+import { BadRequestError } from "@/utils/errors/index.js";
 import acme from "acme-client";
-import { Challenge } from "acme-client/types/rfc8555";
+import { Challenge } from "acme-client/types/rfc8555.js";
 
 const setupChallenges = async (
   req: CustomRequest,

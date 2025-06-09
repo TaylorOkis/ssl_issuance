@@ -2,12 +2,12 @@ import acme from "acme-client";
 import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import db from "@/database/db";
-import getSessionData from "@/utils/session/session";
-import { DIRECTORY_URL } from "@/utils/constants/constants";
-import { CustomRequest } from "@/types/types";
-import { BadRequestError, NotFoundError } from "@/utils/errors";
-import { generateCertificate, getSSLData } from "@/services/acme-services";
+import db from "@/database/db.js";
+import getSessionData from "@/utils/session/session.js";
+import { DIRECTORY_URL } from "@/utils/constants/constants.js";
+import { CustomRequest } from "@/types/types.js";
+import { BadRequestError, NotFoundError } from "@/utils/errors/index.js";
+import { generateCertificate, getSSLData } from "@/services/acme-services.js";
 
 const generateSSLCertificate = async (req: CustomRequest, res: Response) => {
   const { id: userId } = req.user!;

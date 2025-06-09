@@ -1,4 +1,4 @@
-import db from "@/database/db";
+import db from "@/database/db.js";
 import session from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 

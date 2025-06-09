@@ -1,11 +1,11 @@
-import { CustomRequest } from "@/types/types";
-import getSessionData from "@/utils/session/session";
-import { BadRequestError, NotFoundError } from "@/utils/errors";
+import { CustomRequest } from "@/types/types.js";
+import getSessionData from "@/utils/session/session.js";
+import { BadRequestError, NotFoundError } from "@/utils/errors/index.js";
 import {
   validateCsrCertificate,
   generateCsrCertificate,
   formatCSRPemString,
-} from "@/utils/validators/csr";
+} from "@/utils/validators/csr.js";
 import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
