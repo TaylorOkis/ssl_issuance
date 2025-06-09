@@ -1,10 +1,10 @@
 import express from "express";
-import sessionMiddleWare from "@/middlewares/session";
+import sessionMiddleWare from "@/middlewares/session.js";
 import {
   authenticateUser,
   checkUserHasAcmeAccount,
-} from "@/middlewares/authentication";
-import getDomainChallenge from "@/controllers/get-domain-challenge-controller";
+} from "@/middlewares/authentication.js";
+import getDomainChallenge from "@/controllers/get-domain-challenge-controller.js";
 
 const domainRouter = express.Router();
 

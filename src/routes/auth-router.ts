@@ -8,7 +8,7 @@ import {
   changePassword,
   sendVerificationEmail,
   verifyEmail,
-} from "@/controllers/auth-controller";
+} from "@/controllers/auth-controller.js";
 
 const authRouter = express.Router();
 

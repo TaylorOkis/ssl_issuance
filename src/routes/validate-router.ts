@@ -1,11 +1,11 @@
 import express from "express";
-import validateEmailAndDomain from "@/controllers/validate-email-controller";
-import sessionMiddleWare from "@/middlewares/session";
+import validateEmailAndDomain from "@/controllers/validate-email-controller.js";
+import sessionMiddleWare from "@/middlewares/session.js";
 import {
   authenticateUser,
   checkUserHasAcmeAccount,
-} from "@/middlewares/authentication";
-import validateCSR from "@/controllers/validate-csr-controller";
+} from "@/middlewares/authentication.js";
+import validateCSR from "@/controllers/validate-csr-controller.js";
 
 const validateRouter = express.Router();
 

@@ -1,11 +1,11 @@
 import express from "express";
-import sessionMiddleWare from "@/middlewares/session";
+import sessionMiddleWare from "@/middlewares/session.js";
 import {
   authenticateUser,
   checkUserHasAcmeAccount,
-} from "@/middlewares/authentication";
-import generateSSLCertificate from "@/controllers/generate-ssl-certificate";
-import revokeSSLCertificate from "@/controllers/revoke-ssl-controller";
+} from "@/middlewares/authentication.js";
+import generateSSLCertificate from "@/controllers/generate-ssl-certificate.js";
+import revokeSSLCertificate from "@/controllers/revoke-ssl-controller.js";
 
 const sslRouter = express.Router();
 
