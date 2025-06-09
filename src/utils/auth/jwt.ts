@@ -40,7 +40,7 @@ const attachCookieToResponse = ({
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     expires: new Date(Date.now() + threeDays),
     signed: true,
     sameSite: "none",
